@@ -12,6 +12,6 @@
             <a href="ServletGlobal?acao=CadastrarFuncionario">Cadastrar Funcionário</a> 
             <br/>
             <br/>
-            <a href="ServletGlobal?acao=CadastrarProjetos">Cadastrar Projetos</a>
+            <a href="ServletGlobal?acao=CadastrarProjeto">Cadastrar Projetos</a>
         </div>
 </html>

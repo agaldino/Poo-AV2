@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Codigo_Fonte;
+package model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -100,7 +100,7 @@ public class Alocacao implements Serializable {
 
     @Override
     public String toString() {
-        return "Codigo_Fonte.Alocacao[ alocacaoPK=" + alocacaoPK + " ]";
+        return "model.Alocacao[ alocacaoPK=" + alocacaoPK + " ]";
     }
     
 }

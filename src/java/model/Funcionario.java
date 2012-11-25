@@ -2,12 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Codigo_Fonte;
+package model;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,15 +34,19 @@ public class Funcionario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
     @Column(name = "CODFUNCIONARIO")
     private Integer codfuncionario;
+    @Size(max = 500)
     @Column(name = "NOME")
     private String nome;
     @Column(name = "DATANASC")
     @Temporal(TemporalType.DATE)
     private Date datanasc;
+    @Size(max = 500)
     @Column(name = "ESPECIALIDADE")
     private String especialidade;
+    @Size(max = 255)
     @Column(name = "CARGO")
     private String cargo;
     @Column(name = "SALARIO")
@@ -48,6 +54,7 @@ public class Funcionario implements Serializable {
     @Column(name = "SEXO")
     private Character sexo;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "B_ATIVO")
     private Serializable bAtivo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
@@ -160,7 +167,7 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "Codigo_Fonte.Funcionario[ codfuncionario=" + codfuncionario + " ]";
+        return "model.Funcionario[ codfuncionario=" + codfuncionario + " ]";
     }
     
 }

@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Codigo_Fonte;
+package model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -16,9 +17,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class AlocacaoPK implements Serializable {
     @Basic(optional = false)
+    @NotNull
     @Column(name = "CODPROJETO")
     private int codprojeto;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "CODFUNCIONARIO")
     private int codfuncionario;
 
@@ -72,7 +75,7 @@ public class AlocacaoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "Codigo_Fonte.AlocacaoPK[ codprojeto=" + codprojeto + ", codfuncionario=" + codfuncionario + " ]";
+        return "model.AlocacaoPK[ codprojeto=" + codprojeto + ", codfuncionario=" + codfuncionario + " ]";
     }
     
 }

@@ -2,17 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Codigo_Fonte;
+package view;
 
+import control.FuncionarioFacadeLocal;
+import control.ProjetoFacadeLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Funcionario;
 
 /**
  *
@@ -20,6 +24,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ServletGlobal", urlPatterns = {"/ServletGlobal"})
 public class ServletGlobal extends HttpServlet {
+    
+    
+    @EJB
+    FuncionarioFacadeLocal facadeFuncionario;
+    @EJB
+    ProjetoFacadeLocal facadeProjeto;
 
     /**
      * Processes requests for both HTTP
@@ -54,14 +64,28 @@ public class ServletGlobal extends HttpServlet {
             String paginaDestino = null;
 
             if (acao.equals("CadastrarFuncionario")) {
+                
                 paginaDestino = "CadastrarFuncionario.jsp";
+                
             } else if (acao.equals("CadastrarProjeto")) {
+                
                 paginaDestino = "CadastrarProjeto.jsp";
-            } else if (acao.equals("cad")) {
-                PrintWriter out = response.getWriter();
-
-                out.println("<script>alert('TESTSTSETETES TETAS ! '); </script>");
-                out.close();
+                
+            } else if (acao.equals("cadFunc")) {
+                
+                Funcionario f = new Funcionario();
+                
+                f.setNome(request.getParameter("ds_nome"));
+                f.setDatanasc(Date.valueOf(request.getParameter("dt_nasc")));
+                f.setSexo(request.getParameter("sex").charAt(0));
+                f.setEspecialidade(request.getParameter("ds_especialide"));
+                f.setCargo(request.getParameter("ds_cargo"));
+                f.setSalario(Integer.parseInt(request.getParameter("nr_salario")));
+                                            
+                facadeFuncionario.create(f);
+                
+            } else if (acao.equals("cadProj")) {
+                                
             }
 
             request.getRequestDispatcher(paginaDestino).forward(request, response);

@@ -2,12 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Codigo_Fonte;
+package model;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,10 +33,13 @@ public class Projeto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
     @Column(name = "CODPROJETO")
     private Integer codprojeto;
+    @Size(max = 500)
     @Column(name = "NOMEPROJETO")
     private String nomeprojeto;
+    @Size(max = 500)
     @Column(name = "FINANCIADO")
     private String financiado;
     @Column(name = "DTINICIO")
@@ -45,6 +50,7 @@ public class Projeto implements Serializable {
     private Date dtencerramento;
     @Column(name = "INVESTIMENTO")
     private Integer investimento;
+    @Size(max = 255)
     @Column(name = "RESPONSAVEL")
     private String responsavel;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeto")
@@ -144,7 +150,7 @@ public class Projeto implements Serializable {
 
     @Override
     public String toString() {
-        return "Codigo_Fonte.Projeto[ codprojeto=" + codprojeto + " ]";
+        return "model.Projeto[ codprojeto=" + codprojeto + " ]";
     }
     
 }

@@ -12,25 +12,25 @@
         <title>Cadastrar Projeto</title>
     </head>
     <body>
-        <h1>Cadastro de Funcionario</h1>
+        <h1>Cadastro de Projeto</h1>
         <form method="get" action="ServletGlobal">
             <table>
                 <tr>
                     <td>
-                        <label>Matrícula: </label> &nbsp;
-                        <input type="text" name="nr_matricula"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Nome: </label> &nbsp;
+                        <label>Nome do Projeto </label> &nbsp;
                         <input type="text" name="ds_nome"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Data de Nascimento: </label> &nbsp;
-                        <input type="text" name="dt_nasc"/>
+                        <label>Financiador </label> &nbsp;
+                        <input type="text" name="ds_financiador"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Data de Inicio: </label> &nbsp;
+                        <input type="text" name="dt_Inicio"/>
                     </td>
                 </tr>
                 <tr>
@@ -44,7 +44,7 @@
                         <label>Responsavel: </label> &nbsp;
                         <input type="text" name="ds_responsavel"/>
                     </td>
-                </tr>
+                </tr>                
                 <tr>
                     <td>
                         <input type="hidden" name="acao" value="cadProj"/>
@@ -53,5 +53,5 @@
                 </tr>
             </table>
         </form>
-    </body>
+    </body>    
 </html>
