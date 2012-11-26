@@ -7,6 +7,7 @@ package view;
 import control.FuncionarioFacadeLocal;
 import control.ProjetoFacadeLocal;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,30 +73,34 @@ public class ServletGlobal extends HttpServlet {
                 paginaDestino = "CadastrarProjeto.jsp";
                 
             } else if (acao.equals("cadFunc")) {
-                try{
+               
                 Funcionario f = new Funcionario();
                 
                 String nome = request.getParameter("ds_nome");
                 Date dt = Date.valueOf(request.getParameter("dt_nasc"));
                 char sex = request.getParameter("sex").charAt(0);
-                String espec = request.getParameter("ds_especialide");
+                String espec = request.getParameter("ds_espec");
                 String cargo = request.getParameter("ds_cargo");
                 int salario = Integer.parseInt(request.getParameter("nr_salario"));
-                
+                String ativo = request.getParameter("b_ativo");
+                int b_ativo = ativo.equals("true")? 1: 0;               
+              
                 f.setNome(nome);
                 f.setDatanasc(dt);
                 f.setSexo(sex);
                 f.setEspecialidade(espec);
                 f.setCargo(cargo);
                 f.setSalario(salario);
+                f.setBAtivo(b_ativo);
                                             
                 facadeFuncionario.create(f);
-                }catch(Exception e){
-                 Logger.getLogger(ServletGlobal.class.getName()).log(Level.SEVERE, null, e);
-                }
-                
+               
             } else if (acao.equals("cadProj")) {
                                 
+            } else if (acao.equals("listFunc")) {
+                
+                request.setAttribute("funcionarios", facadeFuncionario.findAll());
+                paginaDestino = "ListarFuncionario.jsp";
             }
 
             request.getRequestDispatcher(paginaDestino).forward(request, response);
