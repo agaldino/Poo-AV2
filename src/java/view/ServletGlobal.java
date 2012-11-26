@@ -72,17 +72,27 @@ public class ServletGlobal extends HttpServlet {
                 paginaDestino = "CadastrarProjeto.jsp";
                 
             } else if (acao.equals("cadFunc")) {
-                
+                try{
                 Funcionario f = new Funcionario();
                 
-                f.setNome(request.getParameter("ds_nome"));
-                f.setDatanasc(Date.valueOf(request.getParameter("dt_nasc")));
-                f.setSexo(request.getParameter("sex").charAt(0));
-                f.setEspecialidade(request.getParameter("ds_especialide"));
-                f.setCargo(request.getParameter("ds_cargo"));
-                f.setSalario(Integer.parseInt(request.getParameter("nr_salario")));
+                String nome = request.getParameter("ds_nome");
+                Date dt = Date.valueOf(request.getParameter("dt_nasc"));
+                char sex = request.getParameter("sex").charAt(0);
+                String espec = request.getParameter("ds_especialide");
+                String cargo = request.getParameter("ds_cargo");
+                int salario = Integer.parseInt(request.getParameter("nr_salario"));
+                
+                f.setNome(nome);
+                f.setDatanasc(dt);
+                f.setSexo(sex);
+                f.setEspecialidade(espec);
+                f.setCargo(cargo);
+                f.setSalario(salario);
                                             
                 facadeFuncionario.create(f);
+                }catch(Exception e){
+                 Logger.getLogger(ServletGlobal.class.getName()).log(Level.SEVERE, null, e);
+                }
                 
             } else if (acao.equals("cadProj")) {
                                 
