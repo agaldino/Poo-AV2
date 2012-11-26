@@ -30,7 +30,7 @@
                 <tr>
                     <td>
                         <label>Especialidade: </label> &nbsp;
-                        <input type="text" name="ds_especialidade"/>
+                        <input type="text" name="ds_espec"/>
                     </td>
                 </tr>
                 <tr>
@@ -41,15 +41,21 @@
                 </tr>               
                 <tr>
                     <td>
-                        <label>Sexo</label> &nbsp;
+                        <label>Sexo:</label> &nbsp;
                         <input type="radio" name="sex" value="M"/>
                         <input type="radio" name="sex" value="F"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Salario</label> &nbsp;
+                        <label>Salario:</label> &nbsp;
                         <input type="text" name="nr_salario"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Ativo:</label> &nbsp;
+                        <input type="checkbox" name="b_ativo" value="true"/>
                     </td>
                 </tr>
                <tr>

@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Funcionario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "CODFUNCIONARIO")
     private Integer codfuncionario;
     @Size(max = 500)
@@ -53,10 +53,8 @@ public class Funcionario implements Serializable {
     private Integer salario;
     @Column(name = "SEXO")
     private Character sexo;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "B_ATIVO")
-    private Serializable bAtivo;
+    private Integer bAtivo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
     private Collection<Alocacao> alocacaoCollection;
 
@@ -65,11 +63,6 @@ public class Funcionario implements Serializable {
 
     public Funcionario(Integer codfuncionario) {
         this.codfuncionario = codfuncionario;
-    }
-
-    public Funcionario(Integer codfuncionario, Serializable bAtivo) {
-        this.codfuncionario = codfuncionario;
-        this.bAtivo = bAtivo;
     }
 
     public Integer getCodfuncionario() {
@@ -128,11 +121,11 @@ public class Funcionario implements Serializable {
         this.sexo = sexo;
     }
 
-    public Serializable getBAtivo() {
+    public Integer getBAtivo() {
         return bAtivo;
     }
 
-    public void setBAtivo(Serializable bAtivo) {
+    public void setBAtivo(Integer bAtivo) {
         this.bAtivo = bAtivo;
     }
 

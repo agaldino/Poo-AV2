@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>PROJ_BETA_0.1</title>
+        <title>Project Manager</title>
     </head>
     <body>
         <h3>Esta, será a página inicial com opções de redirecionamento para cadastro e etc</h3>
@@ -13,5 +13,8 @@
             <br/>
             <br/>
             <a href="ServletGlobal?acao=CadastrarProjeto">Cadastrar Projetos</a>
+            <br/>
+            <br/>
+            <a href="ServletGlobal?acao=listFunc">Listar Funcionarios</a>
         </div>
 </html>

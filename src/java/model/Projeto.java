@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Projeto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "CODPROJETO")
     private Integer codprojeto;
     @Size(max = 500)
