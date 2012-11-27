@@ -7,8 +7,8 @@ package view;
 import control.FuncionarioFacadeLocal;
 import control.ProjetoFacadeLocal;
 import java.io.IOException;
-import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Funcionario;
+import model.Projeto;
 
 /**
  *
@@ -25,8 +26,7 @@ import model.Funcionario;
  */
 @WebServlet(name = "ServletGlobal", urlPatterns = {"/ServletGlobal"})
 public class ServletGlobal extends HttpServlet {
-    
-    
+
     @EJB
     FuncionarioFacadeLocal facadeFuncionario;
     @EJB
@@ -65,42 +65,108 @@ public class ServletGlobal extends HttpServlet {
             String paginaDestino = null;
 
             if (acao.equals("CadastrarFuncionario")) {
-                
-                paginaDestino = "CadastrarFuncionario.jsp";
-                
+
+                paginaDestino = "GerenciarFuncionario.jsp?mod=cad";
+
             } else if (acao.equals("CadastrarProjeto")) {
-                
-                paginaDestino = "CadastrarProjeto.jsp";
-                
+
+                paginaDestino = "GerenciarProjeto.jsp?mod=cad";
+
             } else if (acao.equals("cadFunc")) {
-               
+
                 Funcionario f = new Funcionario();
-                
-                String nome = request.getParameter("ds_nome");
-                Date dt = Date.valueOf(request.getParameter("dt_nasc"));
-                char sex = request.getParameter("sex").charAt(0);
-                String espec = request.getParameter("ds_espec");
-                String cargo = request.getParameter("ds_cargo");
-                int salario = Integer.parseInt(request.getParameter("nr_salario"));
-                String ativo = request.getParameter("b_ativo");
-                int b_ativo = ativo.equals("true")? 1: 0;               
-              
-                f.setNome(nome);
-                f.setDatanasc(dt);
-                f.setSexo(sex);
-                f.setEspecialidade(espec);
-                f.setCargo(cargo);
-                f.setSalario(salario);
-                f.setBAtivo(b_ativo);
-                                            
+
+                f.setNome(request.getParameter("ds_nome"));
+                f.setDatanasc(Date.valueOf(request.getParameter("dt_nasc")));
+                f.setSexo(request.getParameter("sex").charAt(0));
+                f.setEspecialidade(request.getParameter("ds_espec"));
+                f.setCargo(request.getParameter("ds_cargo"));
+                f.setSalario(Integer.parseInt(request.getParameter("nr_salario")));
+                f.setBAtivo(request.getParameter("b_ativo").equals("true") ? 1 : 0);
+
                 facadeFuncionario.create(f);
-               
+
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
             } else if (acao.equals("cadProj")) {
-                                
+
+                Projeto p = new Projeto();
+
+                p.setNomeprojeto(request.getParameter("ds_nome"));
+                p.setFinanciado(request.getParameter("ds_financiador"));
+                p.setResponsavel(request.getParameter("ds_responsavel"));
+                p.setInvestimento(Integer.parseInt(request.getParameter("nr_investimento")));
+                p.setDtinicio(Date.valueOf(request.getParameter("dt_Inicio")));
+
+                facadeProjeto.create(p);
+
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
             } else if (acao.equals("listFunc")) {
-                
+
                 request.setAttribute("funcionarios", facadeFuncionario.findAll());
                 paginaDestino = "ListarFuncionario.jsp";
+
+            } else if (acao.equals("editFunc")) {
+
+                request.setAttribute("funcionario", facadeFuncionario.find(Integer.parseInt(request.getParameter("id"))));
+                request.getRequestDispatcher("GerenciarFuncionario.jsp?mod=edit").forward(request, response);
+
+            } else if (acao.equals("listProj")) {
+
+                request.setAttribute("projetos", facadeProjeto.findAll());
+                paginaDestino = "ListarProjeto.jsp";
+
+            } else if (acao.equals("editProj")) {
+
+                request.setAttribute("projeto", facadeProjeto.find(Integer.parseInt(request.getParameter("id"))));
+                request.getRequestDispatcher("GerenciarProjeto.jsp?mod=edit").forward(request, response);
+
+            } else if (acao.equals("editarFuncionario")) {
+
+                Funcionario f = new Funcionario();
+
+                f.setCodfuncionario(Integer.parseInt(request.getParameter("editCod")));
+                f.setNome(request.getParameter("ds_nome"));
+                f.setDatanasc(Date.valueOf(request.getParameter("dt_nasc")));
+                f.setSexo(request.getParameter("sex").charAt(0));
+                f.setEspecialidade(request.getParameter("ds_espec"));
+                f.setCargo(request.getParameter("ds_cargo"));
+                f.setSalario(Integer.parseInt(request.getParameter("nr_salario")));
+                f.setBAtivo(request.getParameter("b_ativo").equals("true") ? 1 : 0);
+
+                facadeFuncionario.edit(f);
+
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
+            } else if (acao.equals("editarProjeto")) {
+
+                Projeto p = new Projeto();
+
+                p.setCodprojeto(Integer.parseInt(request.getParameter("editCod")));
+                p.setNomeprojeto(request.getParameter("ds_nome"));
+                p.setFinanciado(request.getParameter("ds_financiador"));
+                p.setResponsavel(request.getParameter("ds_responsavel"));
+                p.setInvestimento(Integer.parseInt(request.getParameter("nr_investimento")));
+                p.setDtinicio(Date.valueOf(request.getParameter("dt_Inicio")));
+
+                facadeProjeto.edit(p);
+
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else if (acao.equals("excluiProj")) {
+                
+                Projeto p = new Projeto();
+                p.setCodprojeto(Integer.parseInt(request.getParameter("id")));
+                
+                facadeProjeto.remove(p);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else if(acao.equals("excluiFuncionario")){
+                
+                Funcionario f = new Funcionario();
+                f.setCodfuncionario(Integer.parseInt(request.getParameter("id")));
+                
+                facadeFuncionario.remove(f);
+                request.getRequestDispatcher("ListarFuncionario.jsp").forward(request, response);
             }
 
             request.getRequestDispatcher(paginaDestino).forward(request, response);

@@ -20,11 +20,13 @@
             List<Funcionario> funcionarios = (List<Funcionario>) request.getAttribute("funcionarios");
             for (Funcionario f : funcionarios) {
         %>
-        
-    <li><%=f.getNome()%> ( <%=f.getEspecialidade()%> ) </li>
-    
-        <%
-            }
-        %>
-</body>
+
+    <li><%=f.getNome()%> ( <%=f.getEspecialidade()%> ) <a href="ServletGlobal?acao=editFunc&id=<%=f.getCodfuncionario()%>">Editar</a>&nbsp;
+    <a href="ServletGlobal?acao=excluiFuncionario&id=<%=f.getCodfuncionario()%>">Excluir</a></li>
+
+    <%
+        }
+    %>
+    <a href="index.jsp">Voltar</a>
+    </body>
 </html>

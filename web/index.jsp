@@ -16,5 +16,8 @@
             <br/>
             <br/>
             <a href="ServletGlobal?acao=listFunc">Listar Funcionarios</a>
+            <br/>
+            <br/>
+            <a href="ServletGlobal?acao=listProj">Listar Projetos</a>
         </div>
 </html>
