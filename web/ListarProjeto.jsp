@@ -14,14 +14,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Funcionarios</h1>
+        <h1>Projetos</h1>
         <%
             List<Projeto> projetos = (List<Projeto>) request.getAttribute("projetos");
             for (Projeto p : projetos) {
         %>
         
     <li><%=p.getNomeprojeto()%> ( <%=p.getResponsavel()%> ) <a href="ServletGlobal?acao=editProj&id=<%=p.getCodprojeto()%>">Editar</a> &nbsp;
-    <a href="ServletGlobal?acao=excluiProj&id=<%=p.getCodprojeto()%>">Excluir</a></li>
+    <a href="ServletGlobal?acao=excluiProjeto&id=<%=p.getCodprojeto()%>">Excluir</a></li>
     
         <%
             }

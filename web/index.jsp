@@ -19,5 +19,11 @@
             <br/>
             <br/>
             <a href="ServletGlobal?acao=listProj">Listar Projetos</a>
+            <br/>
+            <br/>
+            <a href="ServletGlobal?acao=alocarprojfunc">Alocar</a>
+            <br/>
+            <br/>
+            <a href="ServletGlobal?acao=listarAlocacao">Listar Alocação</a>
         </div>
 </html>
